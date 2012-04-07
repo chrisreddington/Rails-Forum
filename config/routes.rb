@@ -1,9 +1,14 @@
 RailsForum::Application.routes.draw do
+  
   resources :categories
-
   resources :users
   resources :sessions
   root :to => 'categories#home'
+  
+  #match "edit_profile", :controller => "users", :action => "edit"
+  match "edit_profile" => "users#edit"
+  match "profile" => "users#show"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
