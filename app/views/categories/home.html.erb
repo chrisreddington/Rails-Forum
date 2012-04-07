@@ -1,0 +1,18 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="#">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="#">Category 1</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Forum 1</li>
+</ul>
+
+<% @categories.each do |category| %>
+<table class="table">
+	<tr>
+		<td><%= category.name %>
+			<p><%= category.description %></p></td>
+	</tr>
+</table>
+<% end %>
