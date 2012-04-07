@@ -1,21 +1,17 @@
-<h1>/Category</h1>
-
-<p>
-  <b>Name</b><br>
-  <%= @category.name %>
-</p>
+	<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @category.name %></li>
+</ul>
 
 <p>
   <b>Description</b><br>
   <%= @category.description %>
 </p>
 
-<p>
-  <b>Parent</b><br>
-  <%= @category.parent %>
-</p>
 
-<div class="form-actions">
+<div class="form-actions ">
   <%= link_to 'Back', categories_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
   <%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>

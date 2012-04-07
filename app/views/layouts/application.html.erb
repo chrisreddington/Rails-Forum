@@ -37,11 +37,6 @@
                 <li><%= link_to "Link2", "/path2"  %></li>
                 <li><%= link_to "Link3", "/path3"  %></li>
             </ul>	
-			<%= form_tag sessions_path, :class => 'navbar-form pull-right' do %>
-				<%= text_field_tag :email, params[:email], {:class => 'search-query span2', :placeholder => 'E-Mail'} %>
-				<%= password_field_tag :password, nil, {:class => 'search-query span2', :placeholder => 'Password'} %>
-				<%= submit_tag "Log in" %>
-			<% end %>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -66,20 +61,30 @@
             </div>
             <div class="span3">
               <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                    <li><%= link_to "Link1", "/path1"  %></li>
-                    <li><%= link_to "Link2", "/path2"  %></li>
-                    <li><%= link_to "Link3", "/path3"  %></li>
-                </ul>
+			  <% if current_user %>
+				<p><%= current_user.email %>, </p>
+				<ul><li><%= link_to 'logout', session_path(current_user), :method => :delete %></li></ul>
+			<% else %>
+				<h2>Login</h2>
+				<%= form_tag sessions_path do %>
+					<div class="field">
+						<%= label_tag :email %>
+						<%= text_field_tag :email, params[:email] %>
+					</div>
+					<div class="field">
+						<%= label_tag :password %>
+						<%= password_field_tag :password %>
+					</div>
+					<div class="actions"><%= submit_tag "Log in" %></div>
+				<% end %>
+			<% end %>
               </div><!--/.well -->
             </div><!--/span-->
         </div><!--/row-->
       </div><!--/content-->
 
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; RailsForum 2012</p>
       </footer>
 
     </div> <!-- /container -->
