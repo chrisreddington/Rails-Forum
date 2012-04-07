@@ -1,4 +1,11 @@
-<h1>/User</h1>
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @user.username %></li>
+</ul>
+
+<h1><%= @user.username %></h1>
 
 <p>
   <b>Email</b><br>

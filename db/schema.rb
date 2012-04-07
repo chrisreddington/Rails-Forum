@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407011115) do
+ActiveRecord::Schema.define(:version => 20120407134644) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(:version => 20120407011115) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "username"
   end
 
 end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  
 before_filter :authenticate_user!, :except => [:new, :create]
+
   # GET /users
   # GET /users.json
   def index
@@ -14,11 +16,7 @@ before_filter :authenticate_user!, :except => [:new, :create]
   # GET /users/1
   # GET /users/1.json
   def show
-    if params[:id]
       @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,12 +37,8 @@ before_filter :authenticate_user!, :except => [:new, :create]
 
   # GET /users/1/edit
   def edit
-    #Add admin check for any user
-    if params[:id]
+    #TODO: Add admin check for any user
       @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
   end
 
   # POST /users
@@ -103,5 +97,9 @@ before_filter :authenticate_user!, :except => [:new, :create]
         format.html # profile,html.erb
         format.json { render :json => @user }
       end
+  end
+  
+  def edit_profile
+      @user = current_user
   end
 end
