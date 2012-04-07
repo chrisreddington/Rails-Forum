@@ -1,5 +1,7 @@
 RailsForum::Application.routes.draw do
   
+  resources :boards
+
   resources :categories
   resources :users
   resources :sessions

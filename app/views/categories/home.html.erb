@@ -12,28 +12,17 @@
       <th></th>
       <th>Forum</th>
       <th>Posts</th>
-      <th>Something</th>
     </tr>
   </thead>
   <tbody>
+	<% category.boards.each do |board| %>
     <tr>
       <td>icon</td>
-      <td>Example 1</td>
-      <td>123</td>
-      <td>blah</td>
+      <td><strong><%= link_to board.name, board %></strong>
+			<p><%= board.description %></p></td>
+      <td>#</td>
     </tr>
-    <tr>
-      <td>icon</td>
-      <td>Example 2</td>
-      <td>125123</td>
-      <td>etc.</td>
-    </tr>
-    <tr>
-      <td>icon</td>
-      <td>Example 3</td>
-      <td>749</td>
-      <td>blah3</td>
-    </tr>
+	<% end%>
   </tbody>
 </table>
 <% end %>
