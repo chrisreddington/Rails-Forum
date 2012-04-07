@@ -1,0 +1,30 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @category.name, category_path(@board.category_id) %> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @board.name %></li>
+</ul>
+
+<p>
+  <b>Name</b><br>
+  <%= @board.name %>
+</p>
+
+<p>
+  <b>Description</b><br>
+  <%= @board.description %>
+</p>
+
+<p>
+  <b>Parent</b><br>
+  <%= @board.category_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', boards_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_board_path(@board), :class => 'btn' %>
+  <%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

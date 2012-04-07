@@ -1,1 +1,11 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to "Categories", categories_path %> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit <%= @category.name %></li>
+</ul>
+
 <%= render :partial => 'form' %>

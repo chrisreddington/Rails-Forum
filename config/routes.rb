@@ -2,7 +2,9 @@ RailsForum::Application.routes.draw do
   
   resources :boards
 
-  resources :categories
+  resources :categories do
+    post :reorder, :on => :collection
+  end
   resources :users
   resources :sessions
   root :to => 'categories#home'

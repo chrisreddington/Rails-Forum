@@ -15,9 +15,9 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+    <tbody>
     <% @categories.each do |category| %>
-      <tr>
+        <tr>
         <td><%= category.id %></td>
         <td><%= link_to category.name, category_path(category) %></td>
         <td><%= category.created_at %></td>
