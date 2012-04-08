@@ -1,4 +1,7 @@
 class BoardsController < ApplicationController
+  
+  before_filter :authenticate_admin!, :only => [:index, :new, :create, :update, :edit, :destroy]
+  
   # GET /boards
   # GET /boards.json
   def index

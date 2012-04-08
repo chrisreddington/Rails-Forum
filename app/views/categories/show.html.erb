@@ -2,17 +2,28 @@
   <li>
     <a href="/">Home</a> <span class="divider">/</span>
   </li>
-  <li>
-    <%= link_to "Categories", categories_path %> <span class="divider">/</span>
-  </li>
   <li class="active"><%= @category.name %></li>
 </ul>
 
-<p>
-  <b>Description</b><br>
-  <%= @category.description %>
-</p>
-
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Forum</th>
+      <th>Posts</th>
+    </tr>
+  </thead>
+  <tbody>
+	<% @category.boards.each do |board| %>
+    <tr>
+      <td>icon</td>
+      <td><strong><%= link_to board.name, board %></strong>
+			<p><%= board.description %></p></td>
+      <td>#</td>
+    </tr>
+	<% end%>
+  </tbody>
+</table>
 
 <div class="form-actions ">
   <%= link_to 'Back', categories_path, :class => 'btn'  %>

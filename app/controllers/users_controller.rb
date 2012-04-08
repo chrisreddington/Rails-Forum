@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
-before_filter :authenticate_user!, :except => [:new, :create]
+before_filter :authenticate_user!, :except => [:new, :create]  
+  before_filter :authenticate_admin!, :only => [:index, :new,  :edit, :destroy, :update]
 
   # GET /users
   # GET /users.json
@@ -84,22 +85,10 @@ before_filter :authenticate_user!, :except => [:new, :create]
     @user = User.find(params[:id])
     @user.destroy
 
+      
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
-  end
-  
-  def profile
-      @user = current_user
-
-      respond_to do |format|
-        format.html # profile,html.erb
-        format.json { render :json => @user }
-      end
-  end
-  
-  def edit_profile
-      @user = current_user
   end
 end

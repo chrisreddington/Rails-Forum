@@ -1,5 +1,14 @@
 RailsForum::Application.routes.draw do
   
+  get "profile/show"
+
+  get "profile/edit"
+
+  put "profile/update"
+
+  get "profile/destroy"
+  match 'logout' => 'sessions#destroy'
+
   resources :boards
 
   resources :categories do
@@ -8,10 +17,6 @@ RailsForum::Application.routes.draw do
   resources :users
   resources :sessions
   root :to => 'categories#home'
-  
-  #match "edit_profile", :controller => "users", :action => "edit"
-  match "edit_profile" => "users#edit_profile"
-  match "profile" => "users#profile"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
