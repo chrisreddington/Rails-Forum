@@ -1,0 +1,30 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active">My profile</li>
+</ul>
+
+<h1><%= current_user.firstname %> "<%= current_user.username%>" <%= current_user.lastname%></h1>
+
+
+<div class="row-fluid">
+	<div class="span1">
+		<%= image_tag avatar_url(current_user) %>
+	</div>
+	<div class="span11">
+		<table>
+			<tr>
+				<td>E-Mail:</td>
+				<td><%= mail_to current_user.email, current_user.email %></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+
+<div class="form-actions">
+  <%= link_to 'Back', :back, :class => 'btn'  %>
+  <%= link_to 'Edit', profile_edit_path, :class => 'btn' %>
+  <%= link_to 'Delete', profile_destroy_path, :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %>
+</div>

@@ -1,0 +1,18 @@
+<%= simple_form_for @topic, :html => { :class => 'form-horizontal' } do |f| %>
+	<fieldset>
+    	<legend><%= controller.action_name.capitalize %> /Topic</legend>
+		<%= f.input :name %>
+		
+		<div class="control-group string optional">
+			<label class="string optional control-label" for="post_content"> </label>
+			<div class="controls">
+			    <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>
+			</div>
+		</div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', topics_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit profile</li>
+</ul>
+
+
+
+<%= simple_form_for @user, :html => { :class => 'form-horizontal' }, :url => profile_update_path do |f| %>
+
+<fieldset>
+  <legend>Edit <%= @user.username %></legend>
+  
+  <%= f.input :username, :disabled => true %>
+  <%= f.input :email %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+	<div class="form-actions">
+		<%= f.button :submit, :class => 'btn btn-primary' %>
+		<%= link_to 'Delete', profile_destroy_path, :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %>
+	</div>
+</fieldset>
+<% end %>

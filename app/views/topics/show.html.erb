@@ -1,0 +1,27 @@
+<h1>/Topic</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @topic.name %>
+</p>
+
+<p>
+  <b>User</b><br>
+  <%= @topic.user_id %>
+</p>
+
+<p>
+  <b>Last post at</b><br>
+  <%= @topic.last_post_at %>
+</p>
+
+<p>
+  <b>Board</b><br>
+  <%= @topic.board_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', topics_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
+  <%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

@@ -1,0 +1,26 @@
+<h1>Topics</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td><%= topic.id %></td>
+        <td><%= link_to topic.name, topic_path(topic) %></td>
+        <td><%= topic.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_topic_path(topic), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', topic_path(topic), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_topic_path, :class => 'btn btn-primary' %>

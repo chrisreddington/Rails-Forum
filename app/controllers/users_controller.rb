@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
 before_filter :authenticate_user!, :except => [:new, :create]  
-  before_filter :authenticate_admin!, :only => [:index, :new,  :edit, :destroy, :update]
+  before_filter :authenticate_admin!, :only => [:index, :edit, :destroy, :update]
 
   # GET /users
   # GET /users.json
@@ -61,12 +61,7 @@ before_filter :authenticate_user!, :except => [:new, :create]
   # PUT /users/1
   # PUT /users/1.json
   def update
-    #Add admin check, for any user find
-  if params[:id]
     @user = User.find(params[:id])
-  else
-    @user = current_user
-  end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
