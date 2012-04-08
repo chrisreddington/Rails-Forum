@@ -1,5 +1,9 @@
 RailsForum::Application.routes.draw do
   
+  resources :posts
+
+  resources :topics
+
   get "profile/show"
 
   get "profile/edit"

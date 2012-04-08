@@ -8,6 +8,15 @@
   <li class="active"><%= @board.name %></li>
 </ul>
 
+<div class="form-actions">
+  <%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
+  <% if current_user %>
+	<% if admin_user %>
+		<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+	<% end %>
+  <% end%>
+</div>
+
 <p>
   <b>Name</b><br>
   <%= @board.name %>
@@ -24,7 +33,10 @@
 </p>
 
 <div class="form-actions">
-  <%= link_to 'Back', boards_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_board_path(@board), :class => 'btn' %>
-  <%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
+  <% if current_user %>
+	<% if admin_user %>
+		<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+	<% end %>
+  <% end%>
 </div>
