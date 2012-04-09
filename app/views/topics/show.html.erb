@@ -25,7 +25,14 @@
 
 <div class="row-fluid">
 	<div class="span2">
-	  <td><%= user_info(post)%></td>
+	  <%= user_info(post)%>
+	  <% if current_user%>
+	    <% if admin_user %>
+		<%= link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini' %>
+		<%= link_to 'Delete', post_path(post), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn-mini btn-danger' %>
+		<% end %>
+	  <% end%>
+	      
 	</div>
 	<div class="span10">
 		<%= post.content %>

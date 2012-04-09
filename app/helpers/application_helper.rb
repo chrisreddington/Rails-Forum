@@ -7,7 +7,7 @@ module ApplicationHelper
     def latest_post(post)
       if post
         @user = User.find_by_id(post.user_id)
-        raw("<p>#{link_to(post.topic.name, post)} by #{link_to(@user.username, @user)} #{distance_of_time_in_words_to_now post.created_at} ago</p>")
+        raw("<p>#{link_to(post.topic.name, post.topic)} by #{link_to(@user.username, @user)} #{distance_of_time_in_words_to_now post.created_at} ago</p>")
       else
         "No posts"
       end

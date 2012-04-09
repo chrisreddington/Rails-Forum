@@ -58,10 +58,13 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
+    params[:post][:topic_id] = @post.topic_id
+    params[:post][:user_id] = current_user.id
+    @topic = Topic.find(@post.topic_id)
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, :notice => 'Post was successfully updated.' }
+        format.html { redirect_to @topic, :notice => 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
