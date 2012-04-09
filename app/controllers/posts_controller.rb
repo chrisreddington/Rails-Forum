@@ -24,8 +24,9 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
+    @topic = Topic.find_by_id(params[:topic])
     @post = Post.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @post }
@@ -40,11 +41,11 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
-
+    @post = Post.new(:content => params[:post][:content], :user_id => current_user.id, :topic_id => params[:post][:topic_id], :votes => 0)
+    @topic = Topic.find_by_id(params[:post][:topic_id])
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, :notice => 'Post was successfully created.' }
+        format.html { redirect_to @topic, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }

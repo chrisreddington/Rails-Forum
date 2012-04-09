@@ -5,12 +5,10 @@ RailsForum::Application.routes.draw do
   resources :topics
 
   get "profile/show"
-
   get "profile/edit"
-
   put "profile/update"
-
   get "profile/destroy"
+  
   match 'logout' => 'sessions#destroy'
 
   resources :boards

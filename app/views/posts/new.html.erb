@@ -1,5 +1,21 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @topic.category.name, category_path(@topic.category.id) %> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @topic.board.name, category_path(@topic.board.id) %> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @topic.name, topic_path(@topic.id) %> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @topic.name %></li>
+</ul>
+
 <h1>New post</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', :back %>

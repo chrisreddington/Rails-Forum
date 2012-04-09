@@ -3,10 +3,15 @@
 
   <div class="form-inputs">
     <%= f.input :content %>
-    <%= f.input :user_id %>
-    <%= f.input :topic_id %>
-    <%= f.input :votes %>
   </div>
+
+	
+
+<div class="control-group string optional">
+	<div class="controls">
+		<input type="hidden" id="post_topic_id" name="post[topic_id]" value="<%= params[:topic] %>" />
+	</div>
+</div>
 
   <div class="form-actions">
     <%= f.button :submit %>

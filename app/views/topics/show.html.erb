@@ -1,27 +1,44 @@
-<h1>/Topic</h1>
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @topic.category.name, category_path(@topic.category.id) %> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @topic.board.name, board_path(@topic.board.id) %> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @topic.name %></li>
+</ul>
 
-<p>
-  <b>Name</b><br>
-  <%= @topic.name %>
-</p>
-
-<p>
-  <b>User</b><br>
-  <%= @topic.user_id %>
-</p>
-
-<p>
-  <b>Last post at</b><br>
-  <%= @topic.last_post_at %>
-</p>
-
-<p>
-  <b>Board</b><br>
-  <%= @topic.board_id %>
-</p>
-
+<% if current_user %>
 <div class="form-actions">
-  <%= link_to 'Back', topics_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
-  <%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+<%= link_to 'New Post', new_post_path(:topic => @topic.id), :class => 'btn' %>
+  <% if admin_user %>
+	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
+	<%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
 </div>
+<% end %>
+
+<% @topic.posts.each do |post| %>
+
+<div class="row-fluid">
+	<div class="span2">
+	  <td><%= user_info(post)%></td>
+	</div>
+	<div class="span10">
+		<%= post.content %>
+	</div>
+</div>
+<% end %>
+
+<% if current_user %>
+<div class="form-actions">
+<%= link_to 'New Post', new_post_path(:topic => @topic.id), :class => 'btn' %>
+  <% if admin_user %>
+	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
+	<%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
+</div>
+<% end %>
