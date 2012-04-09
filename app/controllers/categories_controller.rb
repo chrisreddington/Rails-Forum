@@ -89,4 +89,5 @@ class CategoriesController < ApplicationController
   def home
     @categories = Category.where("parent = '0'")
   end
+  
 end

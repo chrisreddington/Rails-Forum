@@ -5,6 +5,15 @@
   <li class="active"><%= @category.name %></li>
 </ul>
 
+<% if current_user %>
+	<% if admin_user %>
+		<div class="form-actions ">
+			<%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
+			<%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		</div>
+	<% end %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -12,6 +21,7 @@
       <th>Forum</th>
       <th>Topics</th>
       <th>Posts</th>
+	  <th>Recent Activity</th>
     </tr>
   </thead>
   <tbody>
@@ -21,14 +31,18 @@
       <td><strong><%= link_to board.name, board %></strong>
 			<p><%= board.description %></p></td>
       <td><%= board.topics.count %></td>
-	  <td>TODO</td>
+	  <td><%= board.posts.count %></td>
+	  <td><%= latest_post(board.posts.last) %></td>
     </tr>
 	<% end%>
   </tbody>
 </table>
 
-<div class="form-actions ">
-  <%= link_to 'Back', categories_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
-  <%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
-</div>
+<% if current_user %>
+	<% if admin_user %>
+		<div class="form-actions ">
+			<%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
+			<%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		</div>
+	<% end %>
+<% end %>

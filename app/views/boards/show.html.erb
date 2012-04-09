@@ -8,35 +8,42 @@
   <li class="active"><%= @board.name %></li>
 </ul>
 
-<div class="form-actions">
-  <%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
-  <% if current_user %>
-	<% if admin_user %>
-		<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
-	<% end %>
-  <% end%>
-</div>
+<% if current_user %>
+	<div class="form-actions">
+		<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
+		<% if admin_user %>
+			<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+		<% end %>
+	</div>	
+<% end%>
 
-<p>
-  <b>Name</b><br>
-  <%= @board.name %>
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Forum</th>
+      <th>Posts</th>
+      <th>Recent Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+	<% @board.topics.each do |topic| %>
+    <tr>
+      <td>icon</td>
+      <td><strong><%= link_to topic.name, topic %></strong></td>
+      <td><%= topic.posts.count %></td>
+	  <td><%= latest_post(topic.posts.last) %></td>
+    </tr>
+	<% end%>
+  </tbody>
+</table>
 
-<p>
-  <b>Description</b><br>
-  <%= @board.description %>
-</p>
 
-<p>
-  <b>Parent</b><br>
-  <%= @board.category_id %>
-</p>
-
-<div class="form-actions">
-<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
-  <% if current_user %>
-	<% if admin_user %>
-		<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
-	<% end %>
-  <% end%>
-</div>
+<% if current_user %>
+	<div class="form-actions">
+		<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
+		<% if admin_user %>
+			<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+		<% end %>
+	</div>	
+<% end%>

@@ -21,8 +21,9 @@
       <td>icon</td>
       <td><strong><%= link_to board.name, board %></strong>
 			<p><%= board.description %></p></td>
-      <td><%= board.topics.count %></td>		
-	  <td>TODO</td>
+      <td><%= board.topics.count %></td>
+	  <td><%= board.posts.count %></td>
+	  <td><%= latest_post(board.posts.last) %></td>
     </tr>
 	<% end%>
   </tbody>

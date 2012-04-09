@@ -1,12 +1,29 @@
-<%= simple_form_for @topic, :html => { :class => 'form-horizontal' } do |f| %>
-	<fieldset>
-    	<legend><%= controller.action_name.capitalize %> /Topic</legend>
-		<%= f.input :name %>
+<%= form_for @topic, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>New Topic</legend>
+
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
+    </div>
+		
+			<div class="control-group">
+		      <%= f.label :board_id, :class => 'control-label' %>
+				      <div class="controls">
+		<% if params[:board] %>
+			<%= Board.find_by_id([params[:board]]).name %><input type="hidden" id="topic_board_id" name="topic[board_id]" value="<%= params[:board] %>" />
+		<% else %>
+				<%= f.select(:board_id, @boards.collect {|c| [ c.name, c.id] } )%>
+		<% end %> 		
+		      </div>
+		    </div>
 		
 		<div class="control-group string optional">
 			<label class="string optional control-label" for="post_content"> </label>
 			<div class="controls">
-			    <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>
+			    <textarea name="post[content]"><%= @post.content %></textarea>
 			</div>
 		</div>
 
