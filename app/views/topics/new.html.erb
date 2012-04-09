@@ -1,1 +1,18 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <% if params[:board] 
+	@boardDisplay = Board.find_by_id(params[:board])
+	%>
+  <li>
+    <%= link_to @boardDisplay.category.name, category_path(@boardDisplay.category.id) %> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @boardDisplay.name, board_path(@boardDisplay.id) %> <span class="divider">/</span>
+  </li>
+<% end %>
+  <li class="active">New Post</li>
+</ul>
+
 <%= render :partial => 'form' %>

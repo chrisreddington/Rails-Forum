@@ -34,6 +34,7 @@
           <div class="container nav-collapse">
 	<% if current_user%>
 			<ul class="nav pull-right">
+			  <li><%= link_to (raw('<i class="icon-pencil icon-white"></i> Quick Post Topic'), new_topic_path)%></li>
 			  <li class="dropdown">
 			    <a href="#"
 			          class="dropdown-toggle"
