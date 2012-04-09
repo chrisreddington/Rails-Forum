@@ -13,7 +13,7 @@
 
 <% if current_user %>
 <div class="form-actions">
-<%= link_to 'New Post', new_post_path(:topic => @topic.id), :class => 'btn' %>
+<%= link_to 'Post Reply', new_post_path(:topic => @topic.id), :class => 'btn' %>
   <% if admin_user %>
 	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
 	<%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
@@ -35,7 +35,7 @@
 
 <% if current_user %>
 <div class="form-actions">
-<%= link_to 'New Post', new_post_path(:topic => @topic.id), :class => 'btn' %>
+<%= link_to 'Post Reply', new_post_path(:topic => @topic.id), :class => 'btn' %>
   <% if admin_user %>
 	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
 	<%= link_to 'Delete', topic_path(@topic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
