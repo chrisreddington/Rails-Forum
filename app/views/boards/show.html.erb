@@ -10,9 +10,14 @@
 
 <% if current_user %>
 	<div class="form-actions">
+		
+		<div class="pull-right">
+			<%= will_paginate(@topics)%>
+		</div>
+		
 		<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
 		<% if admin_user %>
-			<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+			<%= link_to 'Edit', edit_board_path(@board), :class => 'btn' %> <%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 		<% end %>
 	</div>	
 <% end%>
@@ -27,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-	<% @board.topics.each do |topic| %>
+	<% @topics.each do |topic| %>
     <tr>
       <td>icon</td>
       <td><strong><%= link_to topic.name, topic %></strong></td>
@@ -41,9 +46,14 @@
 
 <% if current_user %>
 	<div class="form-actions">
+		
+		<div class="pull-right">
+			<%= will_paginate(@topics)%>
+		</div>
+		
 		<%= link_to 'New Topic', new_topic_path(:board => @board.id),  :class => 'btn btn-primary' %>
 		<% if admin_user %>
-			<%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger pull-right' %> &nbsp; <%= link_to 'Edit', edit_board_path(@board), :class => 'btn pull-right' %>
+			<%= link_to 'Edit', edit_board_path(@board), :class => 'btn' %> <%= link_to 'Delete', board_path(@board), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 		<% end %>
 	</div>	
 <% end%>

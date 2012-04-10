@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:new, :create]  
-  before_filter :authenticate_admin!, :only => [:index, :edit, :destroy, :update]
+  before_filter :authenticate_admin!, :only => [:edit, :destroy, :update]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users =  User.paginate(:page => params[:page], :order => 'username')
 
     respond_to do |format|
       format.html # index.html.erb

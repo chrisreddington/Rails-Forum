@@ -6,10 +6,12 @@
 </ul>
 
 <h1>Users</h1>
+
+	<% if admin_user%>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>User</th>
       <th>Email</th>
       <th>Created at</th>
       <th>Actions</th>
@@ -18,7 +20,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.id %></td>
+		<td><%= link_to user.username, user %>
         <td><%= link_to user.email, user_path(user) %></td>
         <td><%= user.created_at %></td>
         <td>
@@ -28,6 +30,32 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table>	
 
-<%= link_to 'New', new_user_path, :class => 'btn btn-primary' %>
+	<% else %>
+	
+	
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Member Since</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+		<td><%= link_to user.username, user %>
+        <td><%= mail_to user.email, user.email %></td>
+        <td><%= distance_of_time_in_words_to_now(user.created_at) + " ago" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+	
+	<% end %>
+	
+	<div class="pull-right">
+		<%= will_paginate(@user) %>
+	</div>

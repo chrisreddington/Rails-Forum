@@ -19,7 +19,12 @@
     <div class="control-group">
       <%= f.label :category_id, :class => 'control-label' %>
       <div class="controls">
-		<%= f.select(:category_id, @categories.collect {|c| [ c.name, c.id] })%>
+		<% if params[:category] 
+			@display = Category.find_by_id(params[:category])%>
+			<%= @display.name %> <input type="hidden" id="board_category_id" name="board[category_id]" value="<%= params[:category] %>" />
+		<% else %>
+			<%= f.select(:category_id, @categories.collect {|c| [ c.name, c.id] })%>
+		<% end %>
       </div>
     </div>
 

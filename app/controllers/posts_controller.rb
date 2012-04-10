@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
+  
+  before_filter :authenticate_user!
+  before_filter :authenticate_admin!, :only => [:index]
+  
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.paginate(:page => params[:page], :order => 'votes, created_at')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,6 +40,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    admin_or_owner_required(@post.user_id)
   end
 
   # POST /posts
@@ -45,6 +50,7 @@ class PostsController < ApplicationController
     @topic = Topic.find_by_id(params[:post][:topic_id])
     respond_to do |format|
       if @post.save
+        @topic.update_attributes(:last_post_at => Time.now) 
         format.html { redirect_to @topic, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
@@ -59,8 +65,9 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     params[:post][:topic_id] = @post.topic_id
-    params[:post][:user_id] = current_user.id
+    params[:post][:user_id] = @post.user_id
     @topic = Topic.find(@post.topic_id)
+    admin_or_owner_required(@post.user_id)
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
@@ -78,6 +85,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    admin_or_owner_required(@post.user_id)
 
     respond_to do |format|
       format.html { redirect_to posts_url }

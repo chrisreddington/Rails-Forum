@@ -8,6 +8,7 @@
 <% if current_user %>
 	<% if admin_user %>
 		<div class="form-actions ">
+			<%= link_to 'New Board', new_board_path(:category => @category.id), :class => 'btn btn-primary' %>
 			<%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
 			<%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 		</div>
@@ -41,6 +42,7 @@
 <% if current_user %>
 	<% if admin_user %>
 		<div class="form-actions ">
+			<%= link_to 'New Board', new_board_path(:category => @category.id), :class => 'btn btn-primary' %>
 			<%= link_to 'Edit', edit_category_path(@category), :class => 'btn' %>
 			<%= link_to 'Delete', category_path(@category), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 		</div>

@@ -14,6 +14,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @posts = Post.paginate(:page => params[:page], :conditions => ['topic_id = ?', @topic.id], :order => 'votes, created_at')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,6 +38,7 @@ class TopicsController < ApplicationController
   # GET /topics/1/edit
   def edit
     @topic = Topic.find(params[:id])
+    @boards = Board.all
   end
 
   # POST /topics

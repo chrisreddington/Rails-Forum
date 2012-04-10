@@ -13,6 +13,11 @@
 
 <% if current_user %>
 <div class="form-actions">
+
+	<div class="pull-right">
+		<%= will_paginate(@posts)%>
+	</div>
+	
 <%= link_to 'Post Reply', new_post_path(:topic => @topic.id), :class => 'btn' %>
   <% if admin_user %>
 	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
@@ -21,13 +26,13 @@
 </div>
 <% end %>
 
-<% @topic.posts.each do |post| %>
+<% @posts.each do |post| %>
 
 <div class="row-fluid">
 	<div class="span2">
 	  <%= user_info(post)%>
 	  <% if current_user%>
-	    <% if admin_user %>
+	    <% if admin_or_owner?(post.user_id) %>
 		<%= link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini' %>
 		<%= link_to 'Delete', post_path(post), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn-mini btn-danger' %>
 		<% end %>
@@ -40,8 +45,14 @@
 </div>
 <% end %>
 
+
 <% if current_user %>
 <div class="form-actions">
+
+<div class="pull-right">
+	<%= will_paginate(@posts)%>
+</div>
+
 <%= link_to 'Post Reply', new_post_path(:topic => @topic.id), :class => 'btn' %>
   <% if admin_user %>
 	<%= link_to 'Edit', edit_topic_path(@topic), :class => 'btn' %>
@@ -49,3 +60,4 @@
   <% end %>
 </div>
 <% end %>
+
