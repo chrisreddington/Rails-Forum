@@ -16,7 +16,9 @@ RailsForum::Application.routes.draw do
   resources :categories do
     post :reorder, :on => :collection
   end
-  resources :users
+  resources :users do
+    get 'confirm'
+  end
   resources :sessions
   root :to => 'categories#home'
   

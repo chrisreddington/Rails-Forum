@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:new, :create]  
+  before_filter :authenticate_user!, :except => [:new, :create, :confirm]  
   before_filter :authenticate_admin!, :only => [:edit, :destroy, :update]
 
   # GET /users
@@ -90,9 +90,15 @@ class UsersController < ApplicationController
   end
   
   def confirm
-    @user = User.find(params[:id])
-    
-    if params[:id]
+    @user = User.find(params[:user_id])
+    respond_to do |format|
+        if params[:hash] == Digest::SHA1.hexdigest(@user.created_at.to_s + @user.id.to_s) && @user.update_attributes(:active => 1)
+          format.html { redirect_to root_url, :notice => 'Your account was authorised successfully.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to root_url, :alert => 'Your account could not be authorised. Please contact an admin.' }
+          format.json { render :json => @user.errors, :status => :unprocessable_entity }
+        end
     end
   end
 end

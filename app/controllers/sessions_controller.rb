@@ -7,8 +7,12 @@ class SessionsController < ApplicationController
     end
     
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to :back, :notice => "Logged in!"
+      if user.active
+        session[:user_id] = user.id
+        redirect_to :back, :notice => "Logged in!"
+      else
+          redirect_to :back, :alert => "Account is not active"
+      end
     else
       redirect_to :back, :alert => "Invalid email or password"
     end

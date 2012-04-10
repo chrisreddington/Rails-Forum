@@ -12,13 +12,6 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <b>Password digest</b><br>
-  <%= @user.password_digest %>
-</p>
-
-<p><%= Digest::SHA1.hexdigest(@user.created_at.to_s + @user.id.to_s) %></p>
-
 <div class="form-actions">
   <%= link_to 'Back', users_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
