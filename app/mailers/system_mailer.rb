@@ -3,7 +3,8 @@ class SystemMailer < ActionMailer::Base
   
   def welcome_email(user)
     @user = user
-    @url = "http://example.com/login"
+    @hash = Digest::SHA1.hexdigest(@user.created_at.to_s + @user.id.to_s)
+    @url = "http://forum.reddingtons.co.uk/" + @user.id + "/confirm/" + @hash
     mail(:to => user.email, :subject => "Welcome to the Forum")
   end
 end
