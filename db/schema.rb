@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410165914) do
+ActiveRecord::Schema.define(:version => 20120411090408) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(:version => 20120410165914) do
     t.integer  "position"
   end
 
+  create_table "conversations", :force => true do |t|
+    t.string   "subject"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "conversation_id"
+    t.text     "body"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -45,6 +59,15 @@ ActiveRecord::Schema.define(:version => 20120410165914) do
     t.integer  "board_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "user_conversations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "conversation_id"
+    t.boolean  "deleted"
+    t.boolean  "read"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

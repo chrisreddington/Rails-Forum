@@ -1,5 +1,15 @@
 RailsForum::Application.routes.draw do
   
+  resources :conversations, :controller => "user_conversations" do
+    resources :messages
+    member do
+      post :mark_as_read
+      post :mark_as_unread
+    end
+  end
+  
+  resource :messages
+  
   resources :posts
 
   resources :topics
@@ -10,12 +20,11 @@ RailsForum::Application.routes.draw do
   get "profile/destroy"
   
   match 'logout' => 'sessions#destroy'
+  match 'messages' => 'conversations#index'
 
   resources :boards
 
-  resources :categories do
-    post :reorder, :on => :collection
-  end
+  resources :categories
   resources :users do
     get 'confirm'
   end
