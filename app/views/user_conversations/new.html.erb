@@ -1,6 +1,6 @@
 <h1>New Conversation</h1>
 
-<%= form_for(@conversation) do |f| %>
+<%= form_for(@conversation, :url => conversations_path) do |f| %>
   <div>
     <%= f.label :to %><br />
     <% for user in User.all do %>

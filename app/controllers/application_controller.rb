@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  helper_method :admin_user
+  helper_method :current_user
+  helper_method :admin_or_owner?
+  helper_method :owner?
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -8,11 +13,6 @@ class ApplicationController < ActionController::Base
   def admin_user
     @admin_user ||= @current_user if current_user.admin?
   end
-  
-  helper_method :admin_user
-  helper_method :current_user
-  helper_method :admin_or_owner?
-  helper_method :owner?
   
   def authenticate_user!
     if current_user.nil?

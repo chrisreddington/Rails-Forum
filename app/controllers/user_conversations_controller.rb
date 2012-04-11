@@ -1,7 +1,7 @@
 class UserConversationsController < ApplicationController
 
   def index
-    @conversations = current_user.user_conversations
+    @conversations = current_user.user_conversations.paginate(:page => params[:page])
   end
 
   def show

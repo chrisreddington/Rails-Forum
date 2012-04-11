@@ -1,9 +1,44 @@
-<h1>My Conversations</h1>
-
-<ul>
-  <% for conversation in @conversations do %>
-    <li class="<%= conversation.read? ? 'read' : 'unread' %>"><%= link_to conversation.subject, conversation_path(conversation) %></li>
-  <% end %>
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Conversations</li>
 </ul>
 
-<%= link_to "Create a New Conversation", new_conversation_path %>
+<div class="form-actions">
+
+<%= link_to "New Conversation", new_conversation_path, :class => 'btn btn-primary' %>
+
+	<div class="pull-right">
+		<%= will_paginate(@conversations)%>
+	</div>
+</div>
+	
+<table class="table table-striped">
+<% for conversation in @conversations do %>
+<tr>
+	<td>
+		<%= link_to(image_tag(avatar_url(conversation.users.first)), conversation_path(conversation)) %>
+	</td>
+	<td>
+	<p><% for user in conversation.users do %>
+	   		<%= link_to("#{user.username}", user) %>,
+	   <% end %></p>
+		<p><%= link_to raw("#{conversation.subject} <br /> #{conversation.messages.last.body}"), conversation_path(conversation) %>
+	</td>
+	<td>
+		<p><%= time_ago_in_words conversation.messages.last.created_at %> ago</p>
+	</td>
+</tr>
+<% end %>
+
+</table>
+
+<div class="form-actions">
+
+<%= link_to "New Conversation", new_conversation_path, :class => 'btn btn-primary' %>
+
+	<div class="pull-right">
+		<%= will_paginate(@conversations)%>
+	</div>
+</div>
