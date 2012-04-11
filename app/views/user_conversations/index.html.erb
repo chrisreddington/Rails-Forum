@@ -17,7 +17,7 @@
 <% for conversation in @conversations do %>
 <tr>
 	<td>
-		<%= link_to(image_tag(avatar_url(conversation.users.first)), conversation_path(conversation)) %>
+		<%= link_to(image_tag(avatar_url(conversation.messages.last.user)), conversation_path(conversation)) %>
 	</td>
 	<td>
 	<p><% for user in conversation.users do %>
