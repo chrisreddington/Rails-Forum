@@ -21,7 +21,7 @@
 	</td>
 	<td>
 	<p><% for user in conversation.users do %>
-	   		<%= link_to("#{user.username}", user) %>,
+	   		<%= link_to("#{user.username}", user) %><% if conversation.users.last != user %>,<% end %>
 	   <% end %></p>
 		<p><%= link_to raw("#{conversation.subject} <br /> #{conversation.messages.last.body}"), conversation_path(conversation) %>
 	</td>
