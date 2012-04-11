@@ -1,5 +1,7 @@
 RailsForum::Application.routes.draw do
   
+  resources :settings
+
   resources :conversations, :controller => "user_conversations" do
     resources :messages
     member do
@@ -8,7 +10,8 @@ RailsForum::Application.routes.draw do
     end
   end
   
-  resource :messages
+  get "site_settings/edit"
+  put "site_settings/update"
   
   resources :posts
 

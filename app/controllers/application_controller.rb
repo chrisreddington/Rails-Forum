@@ -2,12 +2,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   rescue_from ActiveRecord::RecordNotFound, :with => :rescue_not_found
-  
+  before_filter :initialise_variables
   helper_method :admin_user
   helper_method :current_user
   helper_method :admin_or_owner?
   helper_method :owner?
   helper_method :list_can_access_resource?
+  
+  def initialise_variables
+    #initialise site-wide settings
+    @title = Setting.find_by_name('title').value
+    @system_email = Setting.find_by_name('system_email').value
+    @domain_name = Setting.find_by_name('domain_name').value
+  end
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

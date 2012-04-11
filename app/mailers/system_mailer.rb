@@ -1,5 +1,5 @@
 class SystemMailer < ActionMailer::Base
-  default :from => "system@reddingtons.co.uk"
+  default :from => @system_email
   
   def welcome_email(user)
     @user = user
