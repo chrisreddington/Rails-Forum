@@ -9,7 +9,11 @@
 
 <p>
   <b>Email</b><br>
-  <%= @user.email %>
+	<% if @user.email_private? %>
+		User has requested their e-mail remains private.
+	<% else%>
+		<%= @user.email %>
+	<% end %>
 </p>
 
 <div class="form-actions">

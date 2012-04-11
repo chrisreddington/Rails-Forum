@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411210704) do
+ActiveRecord::Schema.define(:version => 20120411221355) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120411210704) do
     t.string   "username"
     t.boolean  "admin"
     t.boolean  "active"
+    t.boolean  "email_private"
   end
 
 end

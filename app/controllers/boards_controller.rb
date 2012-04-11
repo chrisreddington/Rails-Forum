@@ -32,10 +32,14 @@ class BoardsController < ApplicationController
   def new
     @board = Board.new
     @categories = Category.all
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @board }
+    
+    if @categories.empty? || @categories.nil?
+      redirect_to new_category_path, :alert => "You need to make a category before making a board."
+    else
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render :json => @board }
+      end
     end
   end
 
