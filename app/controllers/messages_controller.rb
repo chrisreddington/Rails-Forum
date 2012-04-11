@@ -10,12 +10,12 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        @conversation.update_attributes(:last_message_at => Time.now)
-        format.html { redirect_to conversation_path(params[:message][:conversation_id]), :notice => 'Message posted successfully.' }
-        format.json { render :json => @board, :status => :created, :location => @board }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @board.errors, :status => :unprocessable_entity }
+          @conversation.update_attributes(:last_message_at => Time.now)
+          format.html { redirect_to conversation_path(params[:message][:conversation_id]), :notice => 'Message posted successfully.' }
+          format.json { render :json => @message, :status => :created, :location => @board }
+        else
+          format.html { render :action => "new" }
+          format.json { render :json => @message.errors, :status => :unprocessable_entity }
       end
     end
   end

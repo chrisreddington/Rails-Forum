@@ -1,1 +1,11 @@
+<ul class="breadcrumb">
+  <li>
+    <%= link_to "Home", root_url %><span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to "Boards", boards_path %> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit <%= @board.name %></li>
+</ul>
+
 <%= render :partial => 'form' %>

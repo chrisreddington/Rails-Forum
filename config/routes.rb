@@ -10,6 +10,8 @@ RailsForum::Application.routes.draw do
     end
   end
   
+  resources :messages
+  
   get "site_settings/edit"
   put "site_settings/update"
   
