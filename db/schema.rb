@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411090408) do
+ActiveRecord::Schema.define(:version => 20120411165843) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20120411090408) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.datetime "last_message_at"
   end
 
   create_table "messages", :force => true do |t|

@@ -1,11 +1,11 @@
 class UserConversationsController < ApplicationController
-
+  
   def index
-    @conversations = current_user.user_conversations.paginate(:page => params[:page])
+    @conversations = current_user.conversations.paginate(:page => params[:page], :order => 'last_message_at DESC')
   end
 
   def show
-    @conversation = UserConversation.find params[:id]
+    @conversation = Conversation.find params[:id]
     @message = Message.new
   end
 
@@ -17,9 +17,10 @@ class UserConversationsController < ApplicationController
   def create
     @conversation = UserConversation.new params[:user_conversation]
     @conversation.user = current_user
+    @conversation.conversation.last_message_at = Time.now
     @conversation.conversation.messages.first.user = current_user
     @conversation.save!
-    redirect_to conversation_path(@conversation)
+    redirect_to conversation_path(@conversation.conversation)
   end
 
   def mark_as_read

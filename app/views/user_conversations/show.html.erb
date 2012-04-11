@@ -8,38 +8,37 @@
   <li class="active"><%= @conversation.subject %></li>
 </ul>
 
+<ul class="breadcrumb">
+  <li>
+    Recipients <span class="divider">::</span>
+  </li>
+    <% for user in @conversation.users do %>
+      <li><%= link_to user.username, user %><% if @conversation.users.last != user %><span class="divider">,</span><% end %></li>
+    <% end %>
+</ul>
+
 <% @conversation.messages.each do |message| %>
 
 <div class="row-fluid">
 	<div class="span2">
-		<p><%= (image_tag avatar_url(message.user))%></p>
+		<p><%= link_to ((image_tag avatar_url(message.user)), message.user)%></p>
 	      
 	</div>
 	<div class="span10">
-		<%= message.body %>
+		<div class="pull-right"><%= time_ago_in_words message.created_at%> ago</div>
+		<div class="pull-left"><%= link_to message.user.username, message.user %></div>
+		<br /><%= message.body %>
 	</div>
 </div>
 <% end %>
 
-<div>
-  <h2>People in this conversation:</h2>
-  <ul>
-    <% for user in @conversation.users do %>
-      <li><%= link_to user.username, user %></li>
-    <% end %>
-  </ul>
-</div>
+<%= simple_form_for(@message) do |f| %>
 
-<%= form_for(@message) do |f| %>
-  <div>
-      <div>
-        <%= f.label :body %><br />
-        <%= f.text_area :body %>
-      </div>
+<%= f.input :body %>
 
 <input type="hidden" id="message_conversation_id" name="message[conversation_id]" value="<%= params[:id] %>" />
 
-  <%= f.submit %>
+  <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 
 <%= link_to "Back to conversations", conversations_path %>

@@ -6,6 +6,7 @@ class UserConversation < ActiveRecord::Base
   accepts_nested_attributes_for :conversation
 
   delegate :subject, :to => :conversation
+  delegate :last_message_at, :to => :conversation
   delegate :users, :to => :conversation
 
   attr_accessor :to
