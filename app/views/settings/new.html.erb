@@ -1,5 +1,29 @@
-<h1>New setting</h1>
+<ul class="breadcrumb">
+  <li>
+    <%= link_to "Home", root_url %><span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to "Settings", settings_url %><span class="divider">/</span>
+  </li>
+  <li class="active">New Settings</li>
+</ul>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', settings_path %>
+<fieldset>
+  <legend>New Settings</legend>
+
+<%= simple_form_for(@setting) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">	
+    <%= f.input :name %>
+    <%= f.input :value %>
+</div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+	<%= link_to 'Back', settings_path, :class => 'btn' %>
+  </div>
+<% end %>
+
+</fieldset>

@@ -1,25 +1,29 @@
-<h1>Listing settings</h1>
+<ul class="breadcrumb">
+  <li>
+    <%= link_to "Home", root_url %><span class="divider">/</span>
+  </li>
+  <li class="active">Settings</li>
+</ul>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <fieldset>
+    <legend>Settings</legend>
 
 <% @settings.each do |setting| %>
-  <tr>
-    <td><%= setting.name %></td>
-    <td><%= setting.value %></td>
-    <td><%= link_to 'Show', setting %></td>
-    <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
-    <td><%= link_to 'Destroy', setting, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<%= form_for setting, :html => { :class => 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <%= f.label setting.name, :class => 'control-label' %>
+	  <input type="hidden" id="setting_name" name="setting[name]" value="<%= setting.name %>">
+      <div class="controls">
+        <%= f.text_field "value", :value => setting.value, :class => 'text_field' %>
+		<%= f.submit :class => 'btn btn-primary' %>
+      </div>
+    </div>
+	<% end %>
 <% end %>
-</table>
+</fieldset>
 
 <br />
 
-<%= link_to 'New Setting', new_setting_path %>
+<div class="form-actions">
+<%= link_to 'New Setting', new_setting_path, :class => 'btn btn-primary' %>
+</div>
