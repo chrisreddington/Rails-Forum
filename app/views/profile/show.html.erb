@@ -18,6 +18,13 @@
 				<td>E-Mail:</td>
 				<td><%= mail_to current_user.email, current_user.email %></td>
 			</tr>
+			<% @authentications.each do |authentication| %>
+			
+				<tr>
+					<td><%= authentication.provider.capitalize %>:</td>
+					<td><%= authentication.uid %> <%= link_to("Unlink", auth_remove_path(:id => authentication.id), :confirm => 'Are you sure?')%></td>
+				</tr>
+				<% end %>
 		</table>
 	</div>
 </div>

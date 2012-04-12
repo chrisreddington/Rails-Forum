@@ -1,5 +1,6 @@
 RailsForum::Application.routes.draw do
   
+  match '/auth/:provider/callback' => 'sessions#auth'
   resources :settings do
     member do
       get :edit
@@ -28,6 +29,7 @@ RailsForum::Application.routes.draw do
   
   match 'login' => 'sessions#create'
   match 'logout' => 'sessions#destroy'
+  match 'auth_remove' => 'sessions#destroy_auth'
   match 'messages' => 'conversations#index'
 
   resources :boards

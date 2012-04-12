@@ -1,6 +1,7 @@
 class ProfileController < ApplicationController
   def show
     @user = current_user
+    @authentications = current_user.authentications
   end
   
   def edit
