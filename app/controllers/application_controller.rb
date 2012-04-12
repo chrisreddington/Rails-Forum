@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
   
   def admin_user
-    @admin_user ||= @current_user if current_user.admin?
+    @admin_user ||= @current_user if current_user && current_user.admin?
   end
   
   def authenticate_user!
