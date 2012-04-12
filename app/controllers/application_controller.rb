@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from ActiveRecord::RecordNotFound, :with => :rescue_not_found
   before_filter :initialise_variables
+  helper_method :initialise_variables
   helper_method :admin_user
   helper_method :current_user
   helper_method :admin_or_owner?
