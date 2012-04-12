@@ -2,7 +2,8 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @user = users(:user)
+    @notactive = users(:notactive)
     request.env["HTTP_REFERER"] = "http://somewhere.com/"
   end
 
@@ -11,7 +12,7 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal('Logged in!', flash[:notice])
   end
   
-  test "should deny user (password)" do
+  test "should deny user with incorrect password" do
     post :create, {:login => @user.username, :password => 'abc'}
     assert_equal('Invalid email or password', flash[:alert])
   end
@@ -21,12 +22,18 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal('Logged in!', flash[:notice])
   end
   
-  test "should deny user (not activated their account)" do
-    post :create, {:login => 'notactive', :password =>'123'}
+  test "should deny users who are not active, by username" do
+    post :create, {:login => @notactive.username, :password =>'123'}
+    assert_equal('Account is not active', flash[:alert])
+  end
+  
+  test "should deny users who are not active, by email" do
+    post :create, {:login => @notactive.email, :password =>'123'}
     assert_equal('Account is not active', flash[:alert])
   end
   
   test "successful logout" do
+    login_as(:user)
     get :destroy
     assert_equal('Logged out!', flash[:notice])
   end
