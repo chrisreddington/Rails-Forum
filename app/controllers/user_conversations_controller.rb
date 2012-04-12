@@ -51,6 +51,7 @@ class UserConversationsController < ApplicationController
   def create
     @conversation = UserConversation.new params[:user_conversation]
     @conversation.user = current_user
+    @conversation.read = false
     @conversation.conversation.last_message_at = Time.now
     @conversation.conversation.messages.first.user = current_user
     
