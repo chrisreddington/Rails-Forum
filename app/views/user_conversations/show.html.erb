@@ -27,7 +27,7 @@
 	<div class="span10">
 		<div class="pull-right"><%= time_ago_in_words message.created_at%> ago</div>
 		<div class="pull-left"><%= link_to message.user.username, message.user %></div>
-		<br /><%= message.body %>
+		<br /><%= simple_format(message.body) %>
 	</div>
 </div>
 <% end %>
