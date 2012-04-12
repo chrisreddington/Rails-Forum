@@ -3,11 +3,12 @@
   <li class="active">Home</li>
 </ul>
 
-<% @categories.each do |category| %>
-<h3><%= link_to category.name, category %></h3>
-<p><%= category.description %></p>
 <table class="table table-striped">
+<% @categories.each do |category| %>
   <thead>
+<tr><td colspan="5">
+<h3><%= link_to category.name, category %></h3>
+<p><%= category.description %></p></td></tr>
     <tr>
       <th></th>
       <th>Forum</th>
@@ -27,5 +28,5 @@
     </tr>
 	<% end%>
   </tbody>
-</table>
 <% end %>
+</table>

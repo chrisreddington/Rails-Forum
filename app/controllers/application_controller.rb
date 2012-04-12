@@ -10,10 +10,12 @@ class ApplicationController < ActionController::Base
   helper_method :list_can_access_resource?
   
   def initialise_variables
+    if ENV["RAILS_ENV"] != "test"
     #initialise site-wide settings
     @title = Setting.find_by_name('title').value
     @system_email = Setting.find_by_name('system_email').value
     @domain_name = Setting.find_by_name('domain_name').value
+  end
   end
   
   def current_user
