@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate_admin!
       if admin_user.nil?
-        redirect_to root_url, :alert => "You must be an admin access this page"
+        redirect_to root_url, :alert => "You must be an admin to access this page"
       end
   end
   

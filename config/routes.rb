@@ -24,6 +24,7 @@ RailsForum::Application.routes.draw do
   put "profile/update"
   get "profile/destroy"
   
+  match 'login' => 'sessions#create'
   match 'logout' => 'sessions#destroy'
   match 'messages' => 'conversations#index'
 
