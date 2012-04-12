@@ -18,15 +18,17 @@ class UserConversationsController < ApplicationController
   # GET /conversations/1.json
   def show
     
-    @conversation = Conversation.find params[:id]
+    @conversation = current_user.conversations.find params[:id]
     @message = Message.new
     
     if list_can_access_resource?(@conversation.users)
+      @conversation.user_conversations.find_by_user_id(current_user.id).update_attributes(:read => true)
+      current_user.conversations
       respond_to do |format|
         format.html # show.html.erb
         format.json { render :json => @conversation }
       end
-    else
+   else
       redirect_to root_url, :alert => "You cannot view this page."
     end
   end

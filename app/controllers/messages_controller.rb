@@ -11,6 +11,9 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
           @conversation.update_attributes(:last_message_at => Time.now)
+          @conversation.user_conversations.each do |conversation|
+            conversation.update_attributes(:read => false)
+          end
           format.html { redirect_to conversation_path(params[:message][:conversation_id]), :notice => 'Message posted successfully.' }
           format.json { render :json => @message, :status => :created, :location => @board }
         else

@@ -12,4 +12,8 @@ module ApplicationHelper
         "No posts"
       end
     end
+    
+    def user_message_count
+      return UserConversation.count(:conditions => ["read != ? and user_id = ?", 't', current_user.id]).to_s
+    end
 end
