@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  #rescue_from ActiveRecord::RecordNotFound, :with => :rescue_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :rescue_not_found
   before_filter :initialise_variables
   helper_method :initialise_variables
   helper_method :admin_user

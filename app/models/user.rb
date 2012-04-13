@@ -6,15 +6,18 @@ class User < ActiveRecord::Base
   has_many :user_conversations
   has_many :conversations, :through => :user_conversations
   has_many :messages, :through => :conversations
-  has_many :authentications
+  has_many :authentications, :dependent => :destroy
   
-  validates_presence_of :password, :on => :create
+  #validates :password, :presence => true, :on => :create, :if => :password_required?
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false },
                         :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   
-  def self.create_from_hash!(hash)
-    @name = hash['info']['name'].split(" ")
-    create(:firstname => @name.first, :lastname => @name.last)
+  def apply_omniauth(omniauth)
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+  
+  def password_required?
+    authentications.empty?
   end
 end

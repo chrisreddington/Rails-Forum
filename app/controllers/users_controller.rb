@@ -29,6 +29,26 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    
+    if session[:omniauth]
+      @user.apply_omniauth(session[:omniauth])
+      
+      if session[:omniauth]['info']['nickname']
+        @user.username = session[:omniauth]['info']['nickname']
+      end
+      
+      
+      if session[:omniauth]['info']['email']
+        @user.email = session[:omniauth]['info']['email']
+      end
+      
+      if session[:omniauth]['info']['name']
+        @name = session[:omniauth]['info']['name'].split(' ')
+        @user.firstname = @name.first
+        @user.lastname = @name.last
+      end
+      @user.valid?
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,15 +65,26 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    
+    
+    if session[:omniauth]
+      @user.password_digest = session[:omniauth]['credentials']['secret']
+    end
+    
     respond_to do |format|
       if @user.save
+        
+        if session[:omniauth]
+          @user.authentications.create!(:provider => session[:omniauth]['provider'], :uid => session[:omniauth]['uid'])
+          session[:omniauth] = nil unless @user.new_record?
+        end
+        
         # Tell the UserMailer to send a welcome Email after save
         SystemMailer.welcome_email(@user).deliver
         format.html { redirect_to root_url, :notice => 'A verification e-mail has been sent.' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
-        format.html { render :action => "new" }
+        format.html { render :text => @user.errors.to_yaml }
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end

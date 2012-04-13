@@ -9,10 +9,15 @@
 
 <fieldset>
   <legend>Create an Account</legend>
+
   <%= f.input :username %>
-  <%= f.input :email %>
+	<% if @user.password_required? %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
+<% end %>
+  <%= f.input :email %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
 
 	<div class="form-actions">
 		<%= f.button :submit, :class => 'btn btn-primary' %>

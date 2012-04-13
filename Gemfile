@@ -19,6 +19,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google'
 gem 'omniauth-facebook'
+gem 'omniauth-openid'
 
 # Gems used only for assets and not required
 # in production environments by default.
