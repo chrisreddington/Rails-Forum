@@ -106,7 +106,8 @@
 						<%= password_field_tag :password %>
 					</div>
 					<div class="actions"><%= submit_tag "Log in" %></div>
-					<p><%= link_to 'Signup', new_user_path %>
+					<p><%= link_to(image_tag('google_32.png'), '/auth/google/') %> <%= link_to(image_tag('twitter_32.png'), '/auth/google') %> <%= link_to(image_tag('facebook_32.png'), '/auth/facebook') %> <%= link_to(image_tag('openid_32.png'), '/auth/openid') %></p>
+					<p><%= link_to 'Signup', new_user_path %></p>
 				<% end %>
               </div><!--/.well -->
             </div><!--/span-->	
