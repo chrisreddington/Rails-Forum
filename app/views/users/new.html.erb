@@ -11,7 +11,7 @@
   <legend>Create an Account</legend>
 
   <%= f.input :username %>
-	<% if @user.password_required? %>
+	<% if session[:omniauth].empty? %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
 <% end %>

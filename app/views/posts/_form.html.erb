@@ -1,7 +1,16 @@
+<%= tinymce %>
+
+<%= tinymce_assets %>
+
 <%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+	<div class="control-group string optional">
+		<div class="controls">
+			<textarea id="myuniqueid" class="tinymce"></textarea>
+		</div>
+	</div>
     <%= f.input :content %>
   </div>
 

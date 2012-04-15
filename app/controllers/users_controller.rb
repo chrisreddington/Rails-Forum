@@ -81,10 +81,11 @@ class UsersController < ApplicationController
         
         # Tell the UserMailer to send a welcome Email after save
         SystemMailer.welcome_email(@user).deliver
+        
         format.html { redirect_to root_url, :notice => 'A verification e-mail has been sent.' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
-        format.html { render :text => @user.errors.to_yaml }
+        format.html { render :action => "new" }
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end

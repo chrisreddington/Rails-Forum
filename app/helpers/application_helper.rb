@@ -14,6 +14,6 @@ module ApplicationHelper
     end
     
     def user_message_count
-      return UserConversation.count(:conditions => ["`user_id` = ? AND `read` is not true", current_user.id]).to_s
+      return UserConversation.count(:conditions => ["`user_id` = '?' AND `read` != '?'", current_user.id, true]).to_s
     end                                                                                                     
 end

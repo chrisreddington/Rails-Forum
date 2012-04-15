@@ -20,6 +20,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-google'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
+gem 'tinymce-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

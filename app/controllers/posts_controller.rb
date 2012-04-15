@@ -1,29 +1,28 @@
 class PostsController < ApplicationController
   
   before_filter :authenticate_user!
-  before_filter :authenticate_admin!, :only => [:index]
   
   # GET /posts
   # GET /posts.json
-  def index
-    @posts = Post.paginate(:page => params[:page], :order => 'votes, created_at')
+  # def index
+  #  @posts = Post.paginate(:page => params[:page], :order => 'votes, created_at')
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @posts }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # index.html.erb
+  #    format.json { render :json => @posts }
+  #  end
+  # end
 
   # GET /posts/1
   # GET /posts/1.json
-  def show
-    @post = Post.find(params[:id])
+  # def show
+  #  @post = Post.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @post }
-    end
-  end
+  # respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.json { render :json => @post }
+  #  end
+  # end
 
   # GET /posts/new
   # GET /posts/new.json
@@ -84,8 +83,8 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
     admin_or_owner_required(@post.user_id)
+    @post.destroy
 
     respond_to do |format|
       format.html { redirect_to posts_url }

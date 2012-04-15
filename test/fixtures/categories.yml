@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+    name: This is my category
+    description: This is the category description
+    parent: 0
+    
+two:
+    name: This is my second category
+    description: This is the second description
+    parent: 0

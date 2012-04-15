@@ -4,7 +4,7 @@ user:
   username: chris
   email: somewhere@test.com
   password_digest: $2a$10$ON0mvOsgpddlTdTGi9EmluH/OVdJsiSDoC76HF7XvQz2qANOt2/QK
-  active: t
+  active: 1
   
 notactive:
     username: notactive
@@ -15,5 +15,5 @@ admin:
     username: admin
     email: admin@myforum.com
     password_digest: $2a$10$ON0mvOsgpddlTdTGi9EmluH/OVdJsiSDoC76HF7XvQz2qANOt2/QK
-    active: t
-    admin: t
+    active: 1
+    admin: 1

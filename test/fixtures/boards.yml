@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+    name: Board 1
+    description: This is board 1's descrip
+    category: one
+    
+two:
+    name: Board 2
+    description: This is board 2's descrip
+    category: two

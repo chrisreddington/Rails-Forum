@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   
-  before_filter :authenticate_admin!, :only => [:index, :new, :create, :update, :edit, :destroy]
+  before_filter :authenticate_admin!, :except => [:show]
   
   # GET /boards
   # GET /boards.json
@@ -20,7 +20,6 @@ class BoardsController < ApplicationController
     @category = Category.find(@board.category_id)
     @topics = Topic.paginate(:page => params[:page], :conditions => ['board_id = ?', @board.id], :order => 'last_post_at DESC')
     
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @board }
