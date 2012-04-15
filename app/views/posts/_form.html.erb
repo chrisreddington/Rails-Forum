@@ -1,26 +1,10 @@
-<%= tinymce %>
-
-<%= tinymce_assets %>
-
 <%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-	<div class="control-group string optional">
-		<div class="controls">
-			<textarea id="myuniqueid" class="tinymce"></textarea>
-		</div>
-	</div>
-    <%= f.input :content %>
+    <%= f.input :content, :as => :text, :input_html => { :class => 'tinymce' } %>
+	<%= f.input :topic_id, :as => :hidden, :input_html => { :value => params[:topic] }%>
   </div>
-
-	
-
-<div class="control-group string optional">
-	<div class="controls">
-		<input type="hidden" id="post_topic_id" name="post[topic_id]" value="<%= params[:topic] %>" />
-	</div>
-</div>
 
   <div class="form-actions">
     <%= f.button :submit %>
