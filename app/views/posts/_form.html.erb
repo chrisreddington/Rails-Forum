@@ -1,12 +1,20 @@
-<%= simple_form_for(@post) do |f| %>
+<%= simple_form_for(@post, :html => { :class => "form-horizontal"}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :content, :as => :text, :input_html => { :class => 'tinymce' } %>
+	
+
+    <div class="control-group">
+      <%= f.label :topic_id, :class => 'control-label' %>
+      <div class="controls">
+		<%= f.label @topic.name %>
+      </div>
+    </div>
+    <%= f.input :content, :as => :text, :input_html => { :class => "span6", :rows => 5 } %>
 	<%= f.input :topic_id, :as => :hidden, :input_html => { :value => params[:topic] }%>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
   </div>
 <% end %>

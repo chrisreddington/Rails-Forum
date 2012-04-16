@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @topic = Topic.find_by_id(params[:topic])
+    @topic ||= Topic.find_by_id(params[:topic]) 
     @post = Post.new
     
     respond_to do |format|

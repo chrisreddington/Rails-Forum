@@ -27,6 +27,13 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
     @post = Post.new
+    if params[:board]
+      @boardid = params[:board]
+      @board = Board.find(@boardid)
+    else
+      @board = @board
+    end
+    
     @boards = Board.all
 
     respond_to do |format|
@@ -46,15 +53,8 @@ class TopicsController < ApplicationController
   def create  
     @topic = Topic.new(:name => params[:topic][:name], :last_post_at => Time.now, :board_id => params[:topic][:board_id])
     
-    if @topic.save
-    @post = Post.new(:content => params[:post][:content], :user_id => current_user.id, :topic_id => @topic.id, :votes => 0)
-
-      if @post.save  
-        flash[:notice] = "Successfully created topic."  
-        redirect_to "/topics/#{@topic.id}"  
-      else  
-        redirect :action => 'new'  
-      end  
+    if @topic.save  
+      redirect_to "/topics/#{@topic.id}", :notice => "Successfully created topic" 
     else  
       render :action => 'new'  
     end

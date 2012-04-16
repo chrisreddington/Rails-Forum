@@ -6,7 +6,7 @@
     <%= link_to @topic.category.name, category_path(@topic.category.id) %> <span class="divider">/</span>
   </li>
   <li>
-    <%= link_to @topic.board.name, category_path(@topic.board.id) %> <span class="divider">/</span>
+    <%= link_to @topic.board.name, board_path(@topic.board.id) %> <span class="divider">/</span>
   </li>
   <li>
     <%= link_to @topic.name, topic_path(@topic.id) %> <span class="divider">/</span>
@@ -14,8 +14,27 @@
   <li class="active"><%= @topic.name %></li>
 </ul>
 
-<h1>New post</h1>
+<%= simple_form_for(@post, :html => { :class => "form-horizontal"}) do |f| %>
 
-<%= render 'form' %>
+<fieldset>
+  <legend>New Post</legend>
+  <%= f.error_notification %>
 
-<%= link_to 'Back', :back %>
+  <div class="form-inputs">
+	
+
+    <div class="control-group">
+      <%= f.label :topic_id, :class => 'control-label' %>
+      <div class="controls">
+		<%= f.label @topic.name %>
+      </div>
+    </div>
+    <%= f.input :content, :as => :text, :input_html => { :class => "span6", :rows => 5 } %>
+	<%= f.input :topic_id, :as => :hidden, :input_html => { :value => @topic.id }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %> <%= link_to 'Back', :back, :class => 'btn' %>
+  </div>
+</fieldset>
+<% end %>

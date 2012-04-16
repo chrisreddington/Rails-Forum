@@ -57,7 +57,7 @@ class UserConversationsController < ApplicationController
     
     
     respond_to do |format|
-      if @conversation.save!
+      if @conversation.save
         format.html { redirect_to conversation_path(@conversation.conversation), :notice => 'Conversation was successfully created.' }
         format.json { render :json => @conversation, :status => :created, :location => @conversation }
       else

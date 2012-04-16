@@ -2,51 +2,44 @@
   <li>
     <a href="/">Home</a> <span class="divider">/</span>
   </li>
-  <% if params[:board] 
-	@boardDisplay = Board.find_by_id(params[:board])
-	%>
+<% if params[:board]%>
   <li>
-    <%= link_to @boardDisplay.category.name, category_path(@boardDisplay.category.id) %> <span class="divider">/</span>
+    <%= link_to @board.category.name, category_path(@board.category.id) %> <span class="divider">/</span>
   </li>
   <li>
-    <%= link_to @boardDisplay.name, board_path(@boardDisplay.id) %> <span class="divider">/</span>
+    <%= link_to @board.name, board_path(@board.id) %> <span class="divider">/</span>
   </li>
 <% end %>
   <li class="active">New Post</li>
 </ul>
 
-<%= form_for @topic, :html => { :class => 'form-horizontal' } do |f| %>
-  <fieldset>
-    <legend>New Topic</legend>
+<%= simple_form_for(@topic, :html => { :class => "form-horizontal"}) do |f| %>
 
-    <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name, :class => 'text_field' %>
-      </div>
-    </div>
-		
-			<div class="control-group">
-		      <%= f.label :board_id, :class => 'control-label' %>
-				      <div class="controls">
-		<% if params[:board] %>
-			<%= Board.find_by_id([params[:board]]).name %><input type="hidden" id="topic_board_id" name="topic[board_id]" value="<%= params[:board] %>" />
-		<% else %>
-				<%= f.select(:board_id, @boards.collect {|c| [ c.name, c.id] } )%>
-		<% end %> 		
-		      </div>
-		    </div>
-		
-		<div class="control-group string optional">
-			<label class="string optional control-label" for="post_content"> </label>
-			<div class="controls">
-			    <textarea name="post[content]"><%= @post.content %></textarea>
-			</div>
-		</div>
+<fieldset>
+  <legend>New Topic</legend>
+  <%= f.error_notification %>
 
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to 'Cancel', topics_path, :class => 'btn' %>
-    </div>
-  </fieldset>
+  <div class="form-inputs">
+
+	<%= f.input :name %>
+	
+	<% if params[:board]%>
+	    <div class="control-group">
+	      <%= f.label :board_id, :class => 'control-label' %>
+	      <div class="controls">
+			<%= f.label @board.name %>
+			<%= f.input :board_id, :as => :hidden, :input_html => {:value => @board.id} %>
+	      </div>
+	    </div>
+	<% else %>
+		<%= f.input :board_id, :collection => @boards, :prompt => "Select the board" %>
+	<% end %>
+	  </div>
+	<%= simple_fields_for :post do |p| %>
+		<%= p.input :content, :as => :text, :input_html => { :class => "span6", :rows => 5 } %>
+	<% end %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %> <%= link_to 'Back', :back, :class => 'btn' %>
+  </div>
+</fieldset>
 <% end %>
