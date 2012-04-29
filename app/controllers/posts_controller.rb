@@ -39,6 +39,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    @topic = Topic.find(@post.topic_id)
     admin_or_owner_required(@post.user_id)
   end
 
